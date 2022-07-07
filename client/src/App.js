@@ -80,7 +80,7 @@ class App extends Component {
 
   setResult(result, loanAmount, loanRatio) {
     this.setState({ result });
-    this.state.loanAmount = loanAmount;
+    this.state.loanAmount = `${loanAmount} Kr`;
     this.state.loanRatio = `${loanRatio.toFixed(0)} %`;
   }
 
