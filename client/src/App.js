@@ -68,7 +68,6 @@ class App extends Component {
       homeCost: "",
       loanRatio: "",
       loanAmount: "",
-      interestRate: "",
       result: 0
     });
   }
@@ -107,7 +106,7 @@ class App extends Component {
       this.state.homeCost.trim() !== ""
     ) {
       loanAmount = (eval(this.state.homeCost) - eval(this.state.cashbet));
-      loanRatio = (eval(this.state.cashbet) / eval(this.state.homeCost)) * 100;
+      loanRatio = (1 - (eval(this.state.cashbet) / eval(this.state.homeCost))) * 100;
       result =
         ((loanAmount * (this.state.interestRate) / 12) / 100).toFixed(0);
       result = `${result} Kr`;
