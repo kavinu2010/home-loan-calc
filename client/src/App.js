@@ -1,24 +1,8 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 
 import './App.css';
 
 class App extends Component {
-  componentDidMount() {
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
-  }
-
-  // fetching the GET route from the Express server which matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message)
-    }
-    return body;
-  };
 
   constructor(props) {
     super(props);
@@ -28,23 +12,37 @@ class App extends Component {
       cashbet: "",
       loanRatio: "",
       loanAmount: "",
+      interestRate: "",
       error: false,
       resultLabel: "Monthly Cost"
     };
     this.onSubmitHandle = this.onSubmitHandle.bind(this);
-    this.onChangeHandle = this.onChangeHandle.bind(this);
     this.clearAll = this.clearAll.bind(this);
   }
+
+  componentDidMount() {
+    this.callBackendAPI()
+      .then(res => {
+        this.state.interestRate = res + 2;
+      })
+      .catch(err => console.log(err));
+  }
+
+  callBackendAPI = async () => {
+    const response = await fetch('/interestrate');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+    return body;
+  };
 
   onSubmitHandle(e) {
     e.preventDefault();
     this.calculateAndSetResults();
   }
 
-  onChangeHandle({ value, resultLabel }) {
-    this.clearAll();
-    this.setState({ selectedOption: value, resultLabel: resultLabel });
-  }
   updateHomeCost(e) {
     e.persist();
     const val = e.target.value;
@@ -70,6 +68,7 @@ class App extends Component {
       homeCost: "",
       loanRatio: "",
       loanAmount: "",
+      interestRate: "",
       result: 0
     });
   }
@@ -102,7 +101,7 @@ class App extends Component {
     let result = 0;
     let loanAmount;
     let loanRatio;
-    let interestRate = 0.02;
+
     if (
       this.state.cashbet.trim() !== "" &&
       this.state.homeCost.trim() !== ""
@@ -110,7 +109,7 @@ class App extends Component {
       loanAmount = (eval(this.state.homeCost) - eval(this.state.cashbet));
       loanRatio = (eval(this.state.cashbet) / eval(this.state.homeCost)) * 100;
       result =
-        ((loanAmount * interestRate) / 12).toFixed(0);
+        ((loanAmount * (this.state.interestRate) / 12) / 100).toFixed(0);
       result = `${result} Kr`;
     } else {
       this.setError();
@@ -140,6 +139,10 @@ class App extends Component {
         </div>
 
         <span className="resultText cost">
+          <div class="resultText">
+            With Interest rate of: {this.state.interestRate}
+          </div>
+
           {this.state.resultLabel} = {this.state.result}
         </span>
       </div>

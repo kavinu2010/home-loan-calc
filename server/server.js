@@ -12,7 +12,7 @@ app.get("/interestrate", (req, res) => {
 
     const obj = JSON.parse(data);
     var intArray = obj.central_bank_rates;
-    var resultArray = intArray.filter(function(item) { return item.country === 'Sweden'; });
-    res.send(`${(resultArray[0].rate_pct)+2}`);
+    var resultArray = intArray.filter(function (item) { return item.country === 'Sweden'; });
+    res.send(`${(resultArray[0].rate_pct)}`);
   });
 });
