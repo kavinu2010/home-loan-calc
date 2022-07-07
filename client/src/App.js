@@ -25,7 +25,7 @@ class App extends Component {
     this.state = {
       result: 0,
       homeCost: "",
-      loanAmount: "",
+      cashbet: "",
       error: false,
       resultLabel: "Mortgage"
     };
@@ -46,8 +46,10 @@ class App extends Component {
   updateHomeCost(e) {
     e.persist();
     const val = e.target.value;
+    const cashBet = (e.target.value * 0.15).toFixed(0);
     this.setState({
-      homeCost: val
+      homeCost: val,
+      cashbet: cashBet
     });
   }
 
@@ -55,14 +57,14 @@ class App extends Component {
     e.persist();
     const val = e.target.value;
     this.setState({
-      loanAmount: val
+      cashbet: val
     });
   }
 
   clearAll() {
     this.setState({
       error: false,
-      loanAmount: "",
+      cashbet: "",
       homeCost: "",
       result: 0
     });
@@ -95,14 +97,14 @@ class App extends Component {
     let loanAmount;
     let interestRate = 0.02;
     if (
-      this.state.loanAmount.trim() !== ""
+      this.state.cashbet.trim() !== ""
 
       //&& this.state.details.termLength.trim() !== ""
     ) {
 
-      loanAmount = eval(this.state.loanAmount);
+      loanAmount = (eval(this.state.homeCost) - eval(this.state.cashbet));
       result =
-        ((loanAmount * interestRate) / 12).toFixed(2);
+        ((loanAmount * interestRate) / 12).toFixed(0);
       result = `${result} Kr`;
     } else {
       this.setError();
@@ -116,23 +118,7 @@ class App extends Component {
         style={{ display: (this.state.result && "flex") || "none" }}
       >
         <span className="resultIcon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-          >
-            <g fill="none">
-              <path
-                fill="#6DD400"
-                d="M9 0c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9C-.014 4.044 3.992.014 8.949 0H9z"
-              />
-              <path
-                fill="#FFF"
-                d="M13.986 6.52L7.594 12.912 4.014 9.358 5.472 7.926 7.594 10.023 12.528 5.088z"
-              />
-            </g>
-          </svg>
+
         </span>
         <span className="resultText">
           Result: {this.state.resultLabel} = {this.state.result}
@@ -146,7 +132,6 @@ class App extends Component {
         <div className="wrapperInner">
           <h2 className="heading">Simple Home Loan Calculator</h2>
           <form onSubmit={(e) => this.onSubmitHandle(e)}>
-
             <div className="form__input--control">
               <div className="input-control flex_1" >
                 <label>Cost of the Home</label>
@@ -157,11 +142,11 @@ class App extends Component {
                 />
               </div>
               <div className="input-control flex_1" >
-                <label>Loan Amount</label>
+                <label>Cash bet</label>
                 <input
                   type="number"
                   onChange={(e) => this.updateLoanAmount(e)}
-                  value={this.state.loanAmount}
+                  value={this.state.cashbet}
                 />
               </div>
             </div>
