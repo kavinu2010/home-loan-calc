@@ -1,12 +1,138 @@
- 
-
-.App-header {
-  background-color: #e8eaf0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
+* {
+	 margin: 0;
+	 padding: 0;
+	 box-sizing: border-box;
 }
-
+ html, body, #root {
+	 height: 100%;
+	 font-size: 14px;
+	 line-height: 1.47;
+	 font-family: Roboto, Arial, Helvetica, sans-serif;
+	 background: #dcdcdc;
+}
+ .wrapper {
+	 height: 100%;
+	 width: 100%;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 padding: 10px;
+}
+ .wrapperInner {
+	 display: flex;
+	 width: 650px;
+	 background: #f6f9ff;
+	 border-radius: 4px;
+	 padding: 15px;
+	 flex-direction: column;
+}
+ .wrapperInner .heading {
+	 text-align: center;
+	 margin-bottom: 10px;
+	 color: #333;
+}
+ .wrapperInner form {
+	 flex: 1;
+	 display: flex;
+	 flex-direction: column;
+}
+ .wrapperInner form label {
+	 font-size: 14px;
+	 font-weight: 700;
+	 font-stretch: normal;
+	 font-style: normal;
+	 line-height: normal;
+	 letter-spacing: normal;
+	 color: #6a7ea5;
+	 margin-bottom: 2px;
+}
+ .wrapperInner form input {
+	 width: 100%;
+	 height: 28px;
+	 box-sizing: border;
+	 border-radius: 4px;
+	 border: solid 1px #dce8ef;
+	 background-color: #fff;
+	 font-weight: 400;
+	 font-stretch: normal;
+	 font-style: normal;
+	 line-height: normal;
+	 letter-spacing: normal;
+	 color: #333;
+	 padding: 0 20px;
+}
+ .wrapperInner form .select-control {
+	 margin-bottom: 10px;
+}
+ .wrapperInner form .form__input--control {
+	 display: flex;
+}
+ .wrapperInner form .form__input--control .input-control {
+	 flex: 1;
+	 margin-right: 10px;
+}
+ .wrapperInner form .form__input--control .input-control input {
+	 padding: 20px;
+	 outline-color: #539cfc;
+}
+ .wrapperInner form .form__input--control .input-control:last-child {
+	 margin-right: 0;
+}
+ .wrapperInner form .buttonsControlWrap {
+	 display: flex;
+	 justify-content: space-evenly;
+	 margin: 10px;
+}
+ .wrapperInner form .buttonsControlWrap >
+ button {
+	 padding: 10px 20px;
+	 border-radius: 4px;
+	 box-shadow: 0 5px 8px 0 rgba(136, 200, 247, .39);
+	 border: solid 1px #1777be;
+	 background-color: #1492ef;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 cursor: pointer;
+	 font-weight: 700;
+	 font-stretch: normal;
+	 font-style: normal;
+	 line-height: normal;
+	 letter-spacing: normal;
+	 color: #fff;
+}
+ .wrapperInner form .buttonsControlWrap >
+ button:hover {
+	 box-shadow: 0 5px 8px 0 rgba(136, 200, 247, 1);
+}
+ .wrapperInner form .buttonsControlWrap >
+ button.cancelBtn {
+	 background: #fa4a4a;
+	 border-color: #f70000;
+}
+ .wrapperInner form .buttonsControlWrap >
+ button.cancelBtn:hover {
+	 box-shadow: 0 5px 8px 0 rgba(250, 74, 74, 0.5);
+}
+ .wrapperInner .resultBlock {
+	 border-radius: 4px;
+	 background: #77849f  left center / contain no-repeat;
+	 padding: 15px 45px;
+	 margin-top: 20px;
+	 display: flex;
+	 align-items: center;
+}
+ .wrapperInner .resultBlock .resultIcon {
+	 margin-right: 7px;
+	 margin-top: 2px;
+}
+ .wrapperInner .resultBlock .resultText {
+	 font-size: 16px;
+	 font-weight: 400;
+	 font-stretch: normal;
+	 font-style: normal;
+	 line-height: 1.38;
+	 letter-spacing: normal;
+	 color: #fff;
+}
  
