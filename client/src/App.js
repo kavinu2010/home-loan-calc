@@ -26,6 +26,8 @@ class App extends Component {
       result: 0,
       homeCost: "",
       cashbet: "",
+      loanRatio: "",
+      loanAmount: "",
       error: false,
       resultLabel: "Monthly Cost"
     };
@@ -66,6 +68,8 @@ class App extends Component {
       error: false,
       cashbet: "",
       homeCost: "",
+      loanRatio: "",
+      loanAmount: "",
       result: 0
     });
   }
@@ -74,8 +78,10 @@ class App extends Component {
     this.setState({ error: true });
   }
 
-  setResult(result) {
+  setResult(result, loanAmount, loanRatio) {
     this.setState({ result });
+    this.state.loanAmount = loanAmount;
+    this.state.loanRatio = `${loanRatio.toFixed(0)} %`;
   }
 
   Error() {
@@ -95,21 +101,23 @@ class App extends Component {
     /* eslint no-eval: 0 */
     let result = 0;
     let loanAmount;
+    let loanRatio;
     let interestRate = 0.02;
     if (
       this.state.cashbet.trim() !== "" &&
       this.state.homeCost.trim() !== ""
     ) {
-
       loanAmount = (eval(this.state.homeCost) - eval(this.state.cashbet));
+      loanRatio = (eval(this.state.cashbet) / eval(this.state.homeCost)) * 100;
       result =
         ((loanAmount * interestRate) / 12).toFixed(0);
       result = `${result} Kr`;
     } else {
       this.setError();
     }
-    this.setResult(result);
+    this.setResult(result, loanAmount, loanRatio);
   }
+
   Results() {
     return (
       <div
@@ -121,13 +129,13 @@ class App extends Component {
             Loan Ratio:
           </div>
           <div >
-            <strong >85 %</strong>
+            <strong >{this.state.loanRatio}</strong>
           </div>
           <div class="resultText">
             Loan Amount:
           </div>
           <div class="resultText">
-            <strong >3 468 000 kr</strong>
+            <strong >{this.state.loanAmount}</strong>
           </div>
         </div>
 
