@@ -27,7 +27,7 @@ class App extends Component {
       homeCost: "",
       cashbet: "",
       error: false,
-      resultLabel: "Mortgage"
+      resultLabel: "Monthly Cost"
     };
     this.onSubmitHandle = this.onSubmitHandle.bind(this);
     this.onChangeHandle = this.onChangeHandle.bind(this);
@@ -97,9 +97,8 @@ class App extends Component {
     let loanAmount;
     let interestRate = 0.02;
     if (
-      this.state.cashbet.trim() !== ""
-
-      //&& this.state.details.termLength.trim() !== ""
+      this.state.cashbet.trim() !== "" &&
+      this.state.homeCost.trim() !== ""
     ) {
 
       loanAmount = (eval(this.state.homeCost) - eval(this.state.cashbet));
@@ -117,11 +116,23 @@ class App extends Component {
         className="resultBlock"
         style={{ display: (this.state.result && "flex") || "none" }}
       >
-        <span className="resultIcon">
+        <div class="resultText">
+          <div >
+            Loan Ratio:
+          </div>
+          <div >
+            <strong >85 %</strong>
+          </div>
+          <div class="resultText">
+            Loan Amount:
+          </div>
+          <div class="resultText">
+            <strong >3 468 000 kr</strong>
+          </div>
+        </div>
 
-        </span>
-        <span className="resultText">
-          Result: {this.state.resultLabel} = {this.state.result}
+        <span className="resultText cost">
+          {this.state.resultLabel} = {this.state.result}
         </span>
       </div>
     );

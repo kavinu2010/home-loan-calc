@@ -136,3 +136,7 @@
 	 color: #fff;
 }
  
+.wrapperInner .resultBlock .cost {
+	 margin-left: auto;
+    margin-right: 0;
+}
